@@ -28,10 +28,13 @@ class PasswordPhilosophyCommand extends Command
 
         $dataString = \file_get_contents(__DIR__ . '/../../../data/02/passwords');
 
-        $output->writeln('Processing Data');
-        $result = ($this->passwordPhilosophy)($dataString);
+        $output->writeln('Processing Data for part 1');
+        $result1 = $this->passwordPhilosophy->solvePart1($dataString);
+        $output->writeln(['Result:', $result1]);
 
-        $output->writeln(['Result:', $result]);
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->passwordPhilosophy->solvePart2($dataString);
+        $output->writeln(['Result:', $result2]);
 
         return 0;
     }

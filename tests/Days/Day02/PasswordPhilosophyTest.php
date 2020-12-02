@@ -21,7 +21,7 @@ class PasswordPhilosophyTest extends TestCase
     /**
      * @test
      */
-    public function fixture_will_correctly_counts_valid_passwords(): void
+    public function fixture_part_1_will_correctly_counts_valid_passwords(): void
     {
         $sampleData = <<<DATA
         1-3 a: abcde
@@ -29,8 +29,24 @@ class PasswordPhilosophyTest extends TestCase
         2-9 c: ccccccccc
         DATA;
 
-        $result = ($this->passwordPhilosophy)($sampleData);
+        $result = $this->passwordPhilosophy->solvePart1($sampleData);
 
         $this->assertSame(2, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function fixture_part_2_will_correctly_counts_valid_passwords(): void
+    {
+        $sampleData = <<<DATA
+        1-3 a: abcde
+        1-3 b: cdefg
+        2-9 c: ccccccccc
+        DATA;
+
+        $result = $this->passwordPhilosophy->solvePart2($sampleData);
+
+        $this->assertSame(1, $result);
     }
 }
