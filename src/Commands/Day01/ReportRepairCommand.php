@@ -28,11 +28,15 @@ class ReportRepairCommand extends Command
 
         $dataString = \file_get_contents(__DIR__ . '/../../../data/01/report');
         $dataArray = \explode("\n", $dataString);
+        $dataArray = \array_filter($dataArray);
 
-        $output->writeln('Processing Data');
-        $result = ($this->reportRepair)($dataArray, 2020);
+        $output->writeln('Processing Data for part 1');
+        $result1 = $this->reportRepair->solvePart1($dataArray, 2020);
+        $output->writeln(['Result:', $result1]);
 
-        $output->writeln(['Result:', $result]);
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->reportRepair->solvePart2($dataArray, 2020);
+        $output->writeln(['Result:', $result2]);
 
         return 0;
     }

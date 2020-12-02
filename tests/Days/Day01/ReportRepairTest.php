@@ -21,7 +21,7 @@ class ReportRepairTest extends TestCase
     /**
      * @test
      */
-    public function fixture_returns_product_of_value_pair_summing_to_2020(): void
+    public function fixture_part1_returns_product_of_value_pair_summing_to_2020(): void
     {
         $sampleData = [
             1721,
@@ -32,7 +32,7 @@ class ReportRepairTest extends TestCase
             1456,
         ];
 
-        $result = ($this->reportRepair)($sampleData, 2020);
+        $result = $this->reportRepair->solvePart1($sampleData, 2020);
 
         $this->assertSame(514579, $result);
     }
@@ -40,12 +40,43 @@ class ReportRepairTest extends TestCase
     /**
      * @test
      */
-    public function fixture_does_not_sum_same_number(): void
+    public function fixture_part1_does_not_sum_same_number(): void
     {
         $sampleData = [10, 5, 15];
 
-        $result = ($this->reportRepair)($sampleData, 20);
+        $result = $this->reportRepair->solvePart1($sampleData, 20);
 
         $this->assertSame(75, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function fixture_part2_returns_product_of_value_triplets_summing_to_2020(): void
+    {
+        $sampleData = [
+            1721,
+            979,
+            366,
+            299,
+            675,
+            1456,
+        ];
+
+        $result = $this->reportRepair->solvePart2($sampleData, 2020);
+
+        $this->assertSame(241861950, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function fixture_part2_does_not_sum_same_number(): void
+    {
+        $sampleData = [3, 2, 5, 6];
+
+        $result = $this->reportRepair->solvePart2($sampleData, 10);
+
+        $this->assertSame(30, $result);
     }
 }
