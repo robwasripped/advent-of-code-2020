@@ -4,7 +4,9 @@
 require __DIR__.'../../vendor/autoload.php';
 
 use Robwasripped\Advent2020\Commands\Day01\ReportRepairCommand;
+use Robwasripped\Advent2020\Commands\Day02\PasswordPhilosophyCommand;
 use Robwasripped\Advent2020\Days\Day01\ReportRepair;
+use Robwasripped\Advent2020\Days\Day02\PasswordPhilosophy;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
@@ -12,6 +14,12 @@ $application = new Application();
 $application->add(
     new ReportRepairCommand(
         new ReportRepair()
+    )
+);
+
+$application->add(
+    new PasswordPhilosophyCommand(
+        new PasswordPhilosophy()
     )
 );
 
