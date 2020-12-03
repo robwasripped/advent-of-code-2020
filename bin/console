@@ -5,8 +5,11 @@ require __DIR__.'../../vendor/autoload.php';
 
 use Robwasripped\Advent2020\Commands\Day01\ReportRepairCommand;
 use Robwasripped\Advent2020\Commands\Day02\PasswordPhilosophyCommand;
+use Robwasripped\Advent2020\Commands\Day03\TobogganTrajectoryCommand;
 use Robwasripped\Advent2020\Days\Day01\ReportRepair;
 use Robwasripped\Advent2020\Days\Day02\PasswordPhilosophy;
+use Robwasripped\Advent2020\Days\Day03\TobogganTrajectory;
+use Robwasripped\Advent2020\Utility\StringIterator;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
@@ -20,6 +23,14 @@ $application->add(
 $application->add(
     new PasswordPhilosophyCommand(
         new PasswordPhilosophy()
+    )
+);
+
+$application->add(
+    new TobogganTrajectoryCommand(
+        new TobogganTrajectory(
+            new StringIterator()
+        )
     )
 );
 
