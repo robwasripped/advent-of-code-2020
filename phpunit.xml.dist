@@ -3,10 +3,14 @@
     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd"
 >
 
-<testsuites>
-  <testsuite name="unit">
-    <directory suffix="Test.php">tests</directory>
-  </testsuite>
-</testsuites>
+    <testsuites>
+      <testsuite name="unit">
+        <directory suffix="Test.php">tests</directory>
+      </testsuite>
+    </testsuites>
+
+    <logging>
+        <junit outputFile="build/phpunit/junit.xml"/>
+    </logging>
 
 </phpunit>

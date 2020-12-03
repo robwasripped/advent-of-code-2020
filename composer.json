@@ -1,5 +1,6 @@
 {
     "name": "robwasripped/advent-of-code-2020",
+    "description": "PHP Solutions to Advent of Code 2020",
     "type": "project",
     "require-dev": {
         "phpunit/phpunit": "^9.4"
@@ -24,5 +25,10 @@
         "psr-4": {
             "Robwasripped\\Advent2020\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit"
+        ]
     }
 }
