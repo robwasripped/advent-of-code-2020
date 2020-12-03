@@ -29,8 +29,17 @@ class TobogganTrajectoryCommand extends Command
         $dataString = \file_get_contents(__DIR__ . '/../../../data/03/map');
 
         $output->writeln('Processing Data for part 1');
-        $result1 = $this->tobogganTrajectory->solvePart1($dataString);
+        $result1 = $this->tobogganTrajectory->solve($dataString, 3, 1);
         $output->writeln(['Result:', $result1]);
+
+        $output->writeln('Processing Data for part 2');
+        $result2 =
+            $this->tobogganTrajectory->solve($dataString, 1, 1)
+            * $this->tobogganTrajectory->solve($dataString, 3, 1)
+            * $this->tobogganTrajectory->solve($dataString, 5, 1)
+            * $this->tobogganTrajectory->solve($dataString, 7, 1)
+            * $this->tobogganTrajectory->solve($dataString, 1, 2);
+        $output->writeln(['Result:', $result2]);
 
         return 0;
     }

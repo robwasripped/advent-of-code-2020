@@ -23,8 +23,9 @@ class TobogganTrajectoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider angleProvider
      */
-    public function solvePart1_returns_angle_with_fewest_trees(): void
+    public function solve_returns_trees_given_angle(int $expectedResult, int $rightStep, int $downStep): void
     {
         $mapData = <<<MAP
         ..##.......
@@ -40,8 +41,19 @@ class TobogganTrajectoryTest extends TestCase
         .#..#...#.#
         MAP;
 
-        $result = $this->tobogganTrajectory->solvePart1($mapData);
+        $result = $this->tobogganTrajectory->solve($mapData, $rightStep, $downStep);
 
-        $this->assertSame(7, $result);
+        $this->assertSame($expectedResult, $result);
+    }
+
+    public function angleProvider(): array
+    {
+        return [
+            [2, 1, 1],
+            [7, 3, 1],
+            [3, 5, 1],
+            [4, 7, 1],
+            [2, 1, 2],
+        ];
     }
 }

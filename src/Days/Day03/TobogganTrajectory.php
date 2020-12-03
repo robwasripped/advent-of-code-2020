@@ -16,19 +16,24 @@ class TobogganTrajectory
         $this->stringIterator = $stringIterator;
     }
 
-    public function solvePart1(string $inputString): int
+    public function solve(string $inputString, int $rightStep, int $downStep): int
     {
         $modulo = \strpos($inputString, "\n");
 
         $treeCollisions = 0;
         $rightSteps = 0;
 
-        foreach ($this->stringIterator->iterateString($inputString) as $row) {
+        foreach ($this->stringIterator->iterateString($inputString) as  $index => $row) {
+
+            if ($index % $downStep !== 0) {
+                continue;
+            }
+
             if ($row[$rightSteps % $modulo] === '#') {
                 $treeCollisions++;
             }
 
-            $rightSteps += 3;
+            $rightSteps += $rightStep;
         }
 
         return $treeCollisions;
