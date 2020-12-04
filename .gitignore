@@ -1,4 +1,4 @@
 /vendor/
 phpunit.xml
 .phpunit.result.cache
-/build/
+/build/phpunit/junit.xml

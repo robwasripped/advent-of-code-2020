@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites>
-  <testsuite name="Robwasripped\Advent2020\Tests\Days\Day04\PassportProcessingTest" file="/home/personal/Development/advent-of-code-2020/tests/Days/Day04/PassportProcessingTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.001626">
-    <testcase name="solvePart1_returns_expected_valid_passport_count" class="Robwasripped\Advent2020\Tests\Days\Day04\PassportProcessingTest" classname="Robwasripped.Advent2020.Tests.Days.Day04.PassportProcessingTest" file="/home/personal/Development/advent-of-code-2020/tests/Days/Day04/PassportProcessingTest.php" line="22" assertions="1" time="0.001626"/>
-  </testsuite>
-</testsuites>
