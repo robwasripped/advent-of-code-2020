@@ -7,10 +7,12 @@ use Robwasripped\Advent2020\Commands\Day01\ReportRepairCommand;
 use Robwasripped\Advent2020\Commands\Day02\PasswordPhilosophyCommand;
 use Robwasripped\Advent2020\Commands\Day03\TobogganTrajectoryCommand;
 use Robwasripped\Advent2020\Commands\Day04\PassportProcessingCommand;
+use Robwasripped\Advent2020\Commands\Day05\BinaryBoardingCommand;
 use Robwasripped\Advent2020\Days\Day01\ReportRepair;
 use Robwasripped\Advent2020\Days\Day02\PasswordPhilosophy;
 use Robwasripped\Advent2020\Days\Day03\TobogganTrajectory;
 use Robwasripped\Advent2020\Days\Day04\PassportProcessing;
+use Robwasripped\Advent2020\Days\Day05\BinaryBoarding;
 use Robwasripped\Advent2020\Utility\StringIterator;
 use Symfony\Component\Console\Application;
 
@@ -39,6 +41,14 @@ $application->add(
 $application->add(
     new PassportProcessingCommand(
         new PassportProcessing()
+    )
+);
+
+$application->add(
+    new BinaryBoardingCommand(
+        new BinaryBoarding(
+            new StringIterator()
+        )
     )
 );
 
