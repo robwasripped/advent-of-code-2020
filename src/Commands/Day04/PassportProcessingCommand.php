@@ -32,6 +32,10 @@ class PassportProcessingCommand extends Command
         $result1 = $this->passportProcessing->solvePart1($dataString);
         $output->writeln(['Result:', $result1]);
 
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->passportProcessing->solvePart1($dataString, true);
+        $output->writeln(['Result:', $result2]);
+
         return 0;
     }
 }
