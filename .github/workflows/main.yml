@@ -34,3 +34,6 @@ jobs:
       with:
         name: phpunit
         path: build/phpunit/junit.xml
+
+    - name: Run Static Analysis
+      run: composer run-script static-analysis

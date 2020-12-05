@@ -6,5 +6,5 @@ namespace Robwasripped\Advent2020\Days\Day04\Constraint;
 
 interface ConstraintInterface
 {
-    public function isValid($value): bool;
+    public function isValid(string $value): bool;
 }

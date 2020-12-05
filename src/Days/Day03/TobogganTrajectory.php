@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Robwasripped\Advent2020\Days\Day03;
 
 use Robwasripped\Advent2020\Utility\StringIterator;
+use RuntimeException;
 
 class TobogganTrajectory
 {
@@ -19,6 +20,9 @@ class TobogganTrajectory
     public function solve(string $inputString, int $rightStep, int $downStep): int
     {
         $modulo = \strpos($inputString, "\n");
+        if ($modulo === false) {
+            throw new RuntimeException('Input string has an invalid format. Expected values seperate by new lines');
+        }
 
         $treeCollisions = 0;
         $rightSteps = 0;

@@ -47,7 +47,11 @@ class PassportProcessing
                 $key = $explodedData[0] ?? null;
                 $value = $explodedData[1] ?? null;
 
-                if ($validatedValues && \array_key_exists($key, $validationConstraints)) {
+                if ($key === null) {
+                    continue 2;
+                }
+
+                if ($validatedValues && !\is_null($value) && \array_key_exists($key, $validationConstraints)) {
                     $constraints = $validationConstraints[$key];
                     foreach($constraints as $constraint) {
                         if (!$constraint->isValid($value)) {

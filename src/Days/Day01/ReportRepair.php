@@ -22,6 +22,8 @@ class ReportRepair
                 }
             }
         }
+
+        throw new \RuntimeException('No solution found for input data');
     }
 
     public function solvePart2(array $reportValues, int $sumTarget): int
@@ -29,7 +31,7 @@ class ReportRepair
         foreach($reportValues as $aIndex => $a) {
             foreach($reportValues as $bIndex => $b) {
                 foreach($reportValues as $cIndex => $c) {
-                    if($aIndex - $bIndex === 0 && $bIndex - $cIndex === 0) {
+                    if((int) $aIndex - (int) $bIndex === 0 && (int) $bIndex - (int) $cIndex === 0) {
                         continue;
                     }
 
@@ -43,5 +45,7 @@ class ReportRepair
                 }
             }
         }
+
+        throw new \RuntimeException('No solution found for input data');
     }
 }

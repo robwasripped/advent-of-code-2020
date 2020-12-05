@@ -58,9 +58,14 @@ class PasswordPhilosophy
         return $password[$position1] === $character xor $password[$position2] === $character;
     }
 
+    /**
+     * @return mixed[]
+     */
     private function parsePasswordData(string $passwordData): array
     {
         $parsedString = \sscanf($passwordData, '%d-%d %s %s');
+        \assert(\is_string($parsedString[2]));
+
         $parsedString[2] = $parsedString[2][0];
 
         return $parsedString;

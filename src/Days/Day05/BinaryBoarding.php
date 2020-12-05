@@ -60,8 +60,8 @@ class BinaryBoarding
     {
         list($rowString, $seatString) = \str_split($boardingPassString, 7);
 
-        $row = \bindec(\str_replace(['F', 'B'], ['0', '1'], $rowString));
-        $seat = \bindec(\str_replace(['L', 'R'], ['0', '1'], $seatString));
+        $row = (int) \bindec(\str_replace(['F', 'B'], ['0', '1'], $rowString));
+        $seat = (int) \bindec(\str_replace(['L', 'R'], ['0', '1'], $seatString));
 
         return $row * 8 + $seat;
     }

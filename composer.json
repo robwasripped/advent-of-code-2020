@@ -3,7 +3,8 @@
     "description": "PHP Solutions to Advent of Code 2020",
     "type": "project",
     "require-dev": {
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "^9.4",
+        "vimeo/psalm": "^4.3"
     },
     "license": "MIT",
     "authors": [
@@ -29,6 +30,9 @@
     "scripts": {
         "test": [
             "vendor/bin/phpunit"
+        ],
+        "static-analysis": [
+            "vendor/bin/psalm"
         ]
     }
 }

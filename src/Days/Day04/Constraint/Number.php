@@ -13,7 +13,7 @@ class Number implements ConstraintInterface
         $this->length = $length;
     }
 
-    public function isValid($value): bool
+    public function isValid(string $value): bool
     {
         if (!\ctype_digit($value)) {
             return false;

@@ -6,7 +6,7 @@ namespace Robwasripped\Advent2020\Days\Day04\Constraint;
 
 class HexCode implements ConstraintInterface
 {
-    public function isValid($value): bool
+    public function isValid(string $value): bool
     {
         list($r, $g, $b) = sscanf($value, '#%2x%2x%2x');
 

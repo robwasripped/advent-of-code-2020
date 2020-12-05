@@ -13,7 +13,7 @@ class Enum implements ConstraintInterface
         $this->enums = $enums;
     }
 
-    public function isValid($value): bool
+    public function isValid(string $value): bool
     {
         return \in_array($value, $this->enums, true);
     }

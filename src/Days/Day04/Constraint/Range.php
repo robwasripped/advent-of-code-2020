@@ -15,7 +15,7 @@ class Range implements ConstraintInterface
         $this->maximum = $maximum;
     }
 
-    public function isValid($value): bool
+    public function isValid(string $value): bool
     {
         $integerValue = (int) $value;
 

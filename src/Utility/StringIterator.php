@@ -6,7 +6,10 @@ namespace Robwasripped\Advent2020\Utility;
 
 class StringIterator
 {
-    public function iterateString(string $string, string $delimiter = "\n"): iterable
+    /**
+     * @return \Generator<int, string, mixed, void>
+     */
+    public function iterateString(string $string, string $delimiter = "\n"): \Generator
     {
         $array = explode($delimiter, $string);
 
