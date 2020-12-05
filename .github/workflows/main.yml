@@ -8,32 +8,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and push docker images
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: robwasripped/advent-of-code-2020/advent-of-code-2020
+        tag_with_ref: true
+
+  analyse:
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run Static Analysis
+      run: composer run-script static-analysis
+
+  test:
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
     - uses: actions/checkout@v2
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-
-    - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
-
     - name: Run test suite
-      run: composer run-script test
+      uses: ./.github/actions/test
 
     - name: Save test results
       uses: actions/upload-artifact@v1
       with:
         name: phpunit
         path: build/phpunit/junit.xml
-
-    - name: Run Static Analysis
-      run: composer run-script static-analysis

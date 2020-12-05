@@ -1,0 +1,6 @@
+name: 'Test'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - composer run-script test
