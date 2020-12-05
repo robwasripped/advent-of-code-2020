@@ -32,6 +32,10 @@ class BinaryBoardingCommand extends Command
         $result1 = $this->binaryBoarding->findHighestSeatId($dataString);
         $output->writeln(['Result:', $result1]);
 
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->binaryBoarding->findMissingSeatId($dataString);
+        $output->writeln(['Result:', $result2]);
+
         return 0;
     }
 }
