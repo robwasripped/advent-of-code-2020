@@ -6,6 +6,7 @@ namespace Robwasripped\Advent2020\Tests\Days\Day06;
 
 use PHPUnit\Framework\TestCase;
 use Robwasripped\Advent2020\Days\Day06\CustomCustoms;
+use Robwasripped\Advent2020\Utility\StringIterator;
 
 class CustomCustomsTest extends TestCase
 {
@@ -15,7 +16,9 @@ class CustomCustomsTest extends TestCase
     {
         parent::setUp();
 
-        $this->customCustoms = new CustomCustoms();
+        $this->customCustoms = new CustomCustoms(
+            new StringIterator()
+        );
     }
 
     /**
@@ -23,7 +26,24 @@ class CustomCustomsTest extends TestCase
      */
     public function sumUniqueAnswersPerGroup_correctly_sums_answers(): void
     {
-        $sampleData = <<<ANSWERS
+        $result = $this->customCustoms->sumUniqueAnswersPerGroup($this->getSampleData());
+
+        $this->assertSame(11, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function sumUAnswersGivenByAllPerGroup_correctly_sums_answers(): void
+    {
+        $result = $this->customCustoms->sumUAnswersGivenByAllPerGroup($this->getSampleData());
+
+        $this->assertSame(6, $result);
+    }
+
+    private function getSampleData(): string
+    {
+        return <<<ANSWERS
         abc
 
         a
@@ -40,9 +60,5 @@ class CustomCustomsTest extends TestCase
 
         b
         ANSWERS;
-
-        $result = $this->customCustoms->sumUniqueAnswersPerGroup($sampleData);
-
-        $this->assertSame(11, $result);
     }
 }

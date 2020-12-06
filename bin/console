@@ -56,7 +56,9 @@ $application->add(
 
 $application->add(
     new CustomCustomsCommand(
-        new CustomCustoms()
+        new CustomCustoms(
+            new StringIterator()
+        )
     )
 );
 

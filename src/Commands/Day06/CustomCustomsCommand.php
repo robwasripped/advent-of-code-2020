@@ -29,8 +29,12 @@ class CustomCustomsCommand extends Command
         $dataString = \file_get_contents(__DIR__ . '/../../../data/06/answers');
 
         $output->writeln('Processing Data for part 1');
-        $result1 = $this->customCustoms->sumUniqueAnswersPerGroup($dataString);
-        $output->writeln(['Result:', $result1]);
+        $result2 = $this->customCustoms->sumUniqueAnswersPerGroup($dataString);
+        $output->writeln(['Result:', $result2]);
+
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->customCustoms->sumUAnswersGivenByAllPerGroup($dataString);
+        $output->writeln(['Result:', $result2]);
 
         return 0;
     }
