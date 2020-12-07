@@ -2,6 +2,13 @@ version: "3.3"
 services:
   main:
     build: .
+    environment:
+      - GRAPH_HOST=graph
+      - GRAPH_GRAPH=rules
+      - GRAPH_PORT=8182
+    depends_on:
+      - graph
 
   graph:
-    image: tinkerpop/gremlin-server
+    build:
+      context: inf/graph
