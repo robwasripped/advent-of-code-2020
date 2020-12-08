@@ -32,6 +32,10 @@ class HandheldHaltingCommand extends Command
         $result1 = $this->handheldHalting->getAccumulatorValueBeforeLoop($dataString);
         $output->writeln(['Result:', $result1]);
 
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->handheldHalting->getAccumulatorValueWithAlteredLoop($dataString);
+        $output->writeln(['Result:', $result2]);
+
         return 0;
     }
 }

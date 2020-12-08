@@ -39,4 +39,26 @@ class HandheldHaltingTest extends TestCase
 
         $this->assertSame(5, $result);
     }
+
+    /**
+     * @test
+     */
+    public function getAccumulatorValueWithAlteredLoop_returns_expected_value(): void
+    {
+        $commands = <<<COMMANDS
+        nop +0
+        acc +1
+        jmp +4
+        acc +3
+        jmp -3
+        acc -99
+        acc +1
+        jmp -4
+        acc +6
+        COMMANDS;
+
+        $result = $this->handheldHalting->getAccumulatorValueWithAlteredLoop($commands);
+
+        $this->assertSame(8, $result);
+    }
 }
