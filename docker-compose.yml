@@ -4,10 +4,12 @@ services:
     build: .
     environment:
       - GRAPH_HOST=graph
-      - GRAPH_GRAPH=rules
+      - GRAPH_GRAPH=graph
       - GRAPH_PORT=8182
     depends_on:
       - graph
+    volumes:
+      - .:/usr/src/advent
 
   graph:
     build:

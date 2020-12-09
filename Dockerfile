@@ -10,9 +10,7 @@ RUN docker-php-ext-install zip
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /usr/src/advent
+COPY ./composer.* ./
+RUN composer install --prefer-dist
 
-COPY ./composer.* /usr/src/advent/
-RUN composer install
-
-COPY . /usr/src/advent
+COPY . ./

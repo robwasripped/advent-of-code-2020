@@ -3,22 +3,33 @@
 
 require __DIR__.'../../vendor/autoload.php';
 
+use Brightzone\GremlinDriver\Connection;
+use Brightzone\GremlinDriver\Serializers\Gson3;
 use Robwasripped\Advent2020\Commands\Day01\ReportRepairCommand;
 use Robwasripped\Advent2020\Commands\Day02\PasswordPhilosophyCommand;
 use Robwasripped\Advent2020\Commands\Day03\TobogganTrajectoryCommand;
 use Robwasripped\Advent2020\Commands\Day04\PassportProcessingCommand;
 use Robwasripped\Advent2020\Commands\Day05\BinaryBoardingCommand;
 use Robwasripped\Advent2020\Commands\Day06\CustomCustomsCommand;
+use Robwasripped\Advent2020\Commands\Day07\HandyHaversacksCommand;
 use Robwasripped\Advent2020\Days\Day01\ReportRepair;
 use Robwasripped\Advent2020\Days\Day02\PasswordPhilosophy;
 use Robwasripped\Advent2020\Days\Day03\TobogganTrajectory;
 use Robwasripped\Advent2020\Days\Day04\PassportProcessing;
 use Robwasripped\Advent2020\Days\Day05\BinaryBoarding;
 use Robwasripped\Advent2020\Days\Day06\CustomCustoms;
+use Robwasripped\Advent2020\Days\Day07\HandyHaversacks;
 use Robwasripped\Advent2020\Utility\StringIterator;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
+
+$connection = new Connection([
+    'host' => \getenv('GRAPH_HOST'),
+    'port' => \getenv('GRAPH_PORT'),
+    'graph' => \getenv('GRAPH_GRAPH'),
+]);
+$connection->message->registerSerializer(Gson3::class, true);
 
 $application->add(
     new ReportRepairCommand(
@@ -57,6 +68,15 @@ $application->add(
 $application->add(
     new CustomCustomsCommand(
         new CustomCustoms(
+            new StringIterator()
+        )
+    )
+);
+
+$application->add(
+    new HandyHaversacksCommand(
+        new HandyHaversacks(
+            $connection,
             new StringIterator()
         )
     )
