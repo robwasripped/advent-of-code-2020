@@ -22,12 +22,6 @@ class HandyHaversacksTest extends TestCase
             'host' => \getenv('GRAPH_HOST'),
             'port' => \getenv('GRAPH_PORT'),
             'graph' => \getenv('GRAPH_GRAPH'),
-            'ssl' => [
-                'ssl' => [
-                    'verify_peer'  => false,
-                    'verify_peer_name' => false,
-                ],
-            ],
         ]);
         $connection->message->registerSerializer(Gson3::class, true);
 

@@ -13,24 +13,8 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-
-    - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Build docker-compose stack
+      run: docker-compose up -d
 
     - name: Run test suite
-      run: composer run-script test
-
-    - name: Save test results
-      uses: actions/upload-artifact@v1
-      with:
-        name: phpunit
-        path: build/phpunit/junit.xml
+      run: docker-compose run main composer run-script test

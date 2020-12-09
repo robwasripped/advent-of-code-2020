@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Robwasripped\Advent2020\Days\Day07;
 
 use Brightzone\GremlinDriver\Connection;
+use Brightzone\GremlinDriver\InternalException;
 use Robwasripped\Advent2020\Utility\StringIterator;
+use Throwable;
 
 class HandyHaversacks
 {
@@ -24,60 +26,104 @@ class HandyHaversacks
 
     public function countPossibleParentBags(string $bagColor, string $bagData): int
     {
-        sleep(5);
-        $this->gremlinConnection->open();
+        $this->openGraphConnection();
 
         foreach($this->stringIterator->iterateString($bagData) as $rule) {
 
             list($container, $containedString) = \explode(' contain ', $rule);
 
-            $container = \rtrim($container, 's');
+            $container = \substr($container, 0, \strpos($container, ' bag'));
 
             $containedArray = \explode(', ', $containedString);
             foreach($containedArray as $contained) {
                 $contained = rtrim($contained, 's');
 
-                $matches = [];
-                \preg_match('/(\d+) (.+)/', $contained, $matches);
+                if($contained === 'no other bags.') {
+                    $this->addGraphEntry($container, null, null);
+                } else {
 
-                list(, $containedCount, $containedName) = $matches;
+                    $matches = [];
+                    $result = \preg_match('/(\d+) (.+) bags?.?/', $contained, $matches);
 
-                $this->addGraphEntry($container, $containedName, (int) $containedCount);
+                    list(, $containedCount, $containedName) = $matches;
+
+                    $this->addGraphEntry($container, $containedName, (int) $containedCount);
+                }
             }
         }
 
         $result = $this->gremlinConnection->send(
             <<<GREMLIN
-            g.V()
+            g.V().
+            has("bag", "name", "$bagColor").
+            repeat(out("contained_by").as("container")).
+            until(outE("contained_by").count().is(0)).
+            select(all, "container").unfold().dedup().values("name")
             GREMLIN
         );
 
         $this->gremlinConnection->close();
-        var_dump($result);die;
-        return 0;
+
+        return count($result);
     }
 
-    private function addGraphEntry(string $container, string $contained, int $containedCount): void
+    private function addGraphEntry(string $container, ?string $contained, ?int $containedCount): void
     {
-        $this->gremlinConnection->run(
-            <<<GREMLIN
-            g.V().
-            has("bag", "name", $container).
+        $query = <<<GREMLIN
+        container = g.V().
+            has("bag", "name", "$container").
             fold().
             coalesce(
                 unfold(),
                 addV("bag").
-                property(single, "name", $container)
-            ).
-            as("container").
-            addV("bag").
-            property(single, "name", $contained).
-            as("contained").
-            addE("contains").
-            property("count", $containedCount).
-            from("container").
-            to("contained")
-            GREMLIN
-        );
+                property(single, "name", "$container")
+            ).next();
+        GREMLIN;
+
+        if (\is_string($contained) && \is_int($containedCount)) {
+            $query .= <<<GREMLIN
+            contained = g.V().
+                has("bag", "name", "$contained").
+                fold().
+                coalesce(
+                    unfold(),
+                    addV("bag").
+                    property(single, "name", "$contained")
+                ).
+                next();
+
+            g.V(contained).
+            coalesce(
+                out("contained_by").
+                is(container),
+                addE("contained_by").
+                property(single, "count", $containedCount).
+                from(contained).
+                to(container)
+            )
+            GREMLIN;
+        }
+
+        $this->gremlinConnection->send($query);
+    }
+
+    private function openGraphConnection(): void
+    {
+        $attempts = 0;
+        while(true) {
+            try {
+                $this->gremlinConnection->open();
+                break;
+            } catch(InternalException $exception) {
+                if (++$attempts < 3) {
+                    sleep(3);
+                    continue;
+                }
+
+                throw $exception;
+            }
+        }
+
+        $this->gremlinConnection->run('g.V().drop()');
     }
 }
