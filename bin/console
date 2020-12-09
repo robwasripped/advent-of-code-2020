@@ -13,6 +13,7 @@ use Robwasripped\Advent2020\Commands\Day05\BinaryBoardingCommand;
 use Robwasripped\Advent2020\Commands\Day06\CustomCustomsCommand;
 use Robwasripped\Advent2020\Commands\Day07\HandyHaversacksCommand;
 use Robwasripped\Advent2020\Commands\Day08\HandheldHaltingCommand;
+use Robwasripped\Advent2020\Commands\Day09\EncodingErrorCommand;
 use Robwasripped\Advent2020\Days\Day01\ReportRepair;
 use Robwasripped\Advent2020\Days\Day02\PasswordPhilosophy;
 use Robwasripped\Advent2020\Days\Day03\TobogganTrajectory;
@@ -21,6 +22,7 @@ use Robwasripped\Advent2020\Days\Day05\BinaryBoarding;
 use Robwasripped\Advent2020\Days\Day06\CustomCustoms;
 use Robwasripped\Advent2020\Days\Day07\HandyHaversacks;
 use Robwasripped\Advent2020\Days\Day08\HandheldHalting;
+use Robwasripped\Advent2020\Days\Day09\EncodingError;
 use Robwasripped\Advent2020\Utility\StringIterator;
 use Symfony\Component\Console\Application;
 
@@ -81,11 +83,18 @@ $application->add(
             $connection,
             new StringIterator()
         )
-));
+    )
+);
 
 $application->add(
     new HandheldHaltingCommand(
         new HandheldHalting()
 ));
+
+$application->add(
+    new EncodingErrorCommand(
+        new EncodingError()
+    )
+    );
 
 $application->run();
