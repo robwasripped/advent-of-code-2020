@@ -32,6 +32,10 @@ class EncodingErrorCommand extends Command
         $result1 = $this->encodingError->findFirstNumberToNotSumFromPrevious5numbers($dataString, 25);
         $output->writeln(['Result:', $result1]);
 
+        $output->writeln('Processing Data for part 2');
+        $result2 = $this->encodingError->sumBoundaryNumbersOfContiguousNumbersSummingToGivenNumber($dataString, $result1);
+        $output->writeln(['Result:', $result2]);
+
         return 0;
     }
 }
