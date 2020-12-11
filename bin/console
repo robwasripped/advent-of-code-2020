@@ -15,6 +15,7 @@ use Robwasripped\Advent2020\Commands\Day07\HandyHaversacksCommand;
 use Robwasripped\Advent2020\Commands\Day08\HandheldHaltingCommand;
 use Robwasripped\Advent2020\Commands\Day09\EncodingErrorCommand;
 use Robwasripped\Advent2020\Commands\Day10\AdapterArrayCommand;
+use Robwasripped\Advent2020\Commands\Day11\SeatingSystemCommand;
 use Robwasripped\Advent2020\Days\Day01\ReportRepair;
 use Robwasripped\Advent2020\Days\Day02\PasswordPhilosophy;
 use Robwasripped\Advent2020\Days\Day03\TobogganTrajectory;
@@ -25,6 +26,7 @@ use Robwasripped\Advent2020\Days\Day07\HandyHaversacks;
 use Robwasripped\Advent2020\Days\Day08\HandheldHalting;
 use Robwasripped\Advent2020\Days\Day09\EncodingError;
 use Robwasripped\Advent2020\Days\Day10\AdapterArray;
+use Robwasripped\Advent2020\Days\Day11\SeatingSystem;
 use Robwasripped\Advent2020\Utility\StringIterator;
 use Symfony\Component\Console\Application;
 
@@ -104,5 +106,11 @@ $application->add(
         new AdapterArray()
     )
 );
+
+$application->add(
+    new SeatingSystemCommand(
+        new SeatingSystem()
+    )
+    );
 
 $application->run();
